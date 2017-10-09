@@ -12,6 +12,13 @@
                         <h4>{{ $thread->title }}</h4>
                         <div class="body">{{ $thread->body }}</div>
                     </article>
+                    <article>
+                        <h4>Replies</h4>
+                        @foreach ($thread->replies as $reply)
+                            <hr>
+                            <div class="body">{{ $reply->body }}</div>
+                        @endforeach
+                    </article>
                 </div>
             </div>
         </div>
