@@ -12,15 +12,25 @@
                         <h4>{{ $thread->title }}</h4>
                         <div class="body">{{ $thread->body }}</div>
                     </article>
-                    <article>
-                        <h4>Replies</h4>
-                        @foreach ($thread->replies as $reply)
-                            <hr>
-                            <div class="body">{{ $reply->body }}</div>
-                        @endforeach
-                    </article>
                 </div>
             </div>
+        </div>
+    </div>
+    <h3 class="text-center">Replies</h3>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            @foreach ($thread->replies as $reply)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {{ $reply->owner->name }} said {{ $reply->created_at->diffForHumans() }}
+                    </div>
+                    <div class="panel-body">
+                        <article>
+                            <div class="body">{{ $reply->body }}</div>
+                        </article>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
