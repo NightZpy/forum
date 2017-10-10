@@ -5,10 +5,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">{{ str_limit( $thread->title, 12) }}</div>
+                <div class="panel-heading">
+                    <a href="#">{{ $thread->owner->name }}</a> write:
+                    {{ str_limit( $thread->title, 12) }}
+                </div>
 
                 <div class="panel-body">
-                    <article>
+                    <article>                        
                         <h4>{{ $thread->title }}</h4>
                         <div class="body">{{ $thread->body }}</div>
                     </article>

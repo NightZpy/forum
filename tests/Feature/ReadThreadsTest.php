@@ -38,4 +38,10 @@ class ReadThreadsTest extends TestCase
          $this->get('/threads/' . $this->thread->id)
               ->assertSee($reply->body);
     } 
+
+    public function test_a_user_can_read_owner_thread()
+    {
+        $this->get('/threads/' . $this->thread->id)
+             ->assertSee($this->thread->owner->name);
+    }
 }
