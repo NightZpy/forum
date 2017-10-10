@@ -16,6 +16,11 @@ class Thread extends Model
 		return $this->hasMany(Reply::class);
 	}
 
+	public function addReply($reply)
+	{
+		$this->replies()->create($reply);
+	}
+
     public function getPathAttribute() {
     	return route('threads.show', $this->id);
     }
