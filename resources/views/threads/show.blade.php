@@ -23,8 +23,18 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @foreach ($thread->replies as $reply)
-                @include('threads.replies')
+                @include('threads.replies.index')
             @endforeach
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            @if (auth()->check())
+                    @include('threads.replies.form')
+            @else
+                <p>Please, <a href="/login">sign in</a> to participate in this discussion!</p>
+            @endif
         </div>
     </div>
 </div>
