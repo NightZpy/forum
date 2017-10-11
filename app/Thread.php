@@ -29,6 +29,6 @@ class Thread extends Model
 	}
 
     public function getPathAttribute() {
-    	return route('threads.show', $this->id);
+    	return str_replace('?', '/', route('threads.show', [$this->channel->slug, $this->id], false));
     }
 }
