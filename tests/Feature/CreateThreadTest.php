@@ -41,11 +41,21 @@ class CreateThreadTest extends TestCase
     }
 
     public function test_a_thread_require_a_title()
-    {
-        $this->withExceptionHandling()
-             ->signIn();
-        $thread = make ('App\Thread', ['title' => null]);
-        $this->post('/threads', $thread->toArray())
+    {        
+        $this->publishThread(['title' => null])
              ->assertSessionHasErrors('title');
+    }
+
+    public function test_a_thread_require_a_body()
+    {
+        $this->publishThread(['body' => null])
+             ->assertSessionHasErrors('body');
+    }
+
+    public function publishThread($params = [])
+    {
+        $this->withExceptionHandling()->signIn();
+        $thread = make ('App\Thread', $params);
+        return $this->post('/threads', $thread->toArray());
     }
 }
