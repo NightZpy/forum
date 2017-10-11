@@ -18,15 +18,16 @@ class CreateThreadTest extends TestCase
     public function test_a_authenticated_user_may_create_a_thread()
 	{
     	$user = factory('App\User')->create();
-    	$this->be ($user);	
+    	$this->actingAs ($user);	
 
     	$this->post('/threads', $this->thread->toArray());
 
-    	$this->get('/threads')
-    		 ->assertSee($this->thread->title);
+    	$this->get($this->thread->path)
+    		 ->assertSee($this->thread->title)
+    		 ->assertSee($this->thread->body);
 	}  
 
-	public function test_a_unauthenticated_users_may_not_create_a_thread()
+	public function test_a_guests_may_create_a_thread()
 	{
 		$this->expectException('Illuminate\Auth\AuthenticationException');
         $this->post('/threads', []);
