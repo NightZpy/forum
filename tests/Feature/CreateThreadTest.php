@@ -12,12 +12,12 @@ class CreateThreadTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->thread = factory('App\Thread')->make();
+        $this->thread = make('App\Thread');
     }  
     
     public function test_a_authenticated_user_may_create_a_thread()
 	{
-    	$user = factory('App\User')->create();
+    	$user = create('App\User');
     	$this->actingAs ($user);	
 
     	$this->post('/threads', $this->thread->toArray());
