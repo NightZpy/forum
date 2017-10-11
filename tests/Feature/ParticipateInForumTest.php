@@ -17,8 +17,7 @@ class ParticipateInForumTest extends TestCase
 
     public function test_an_authenticated_user_may_participate_in_forum_threads()
     {
-    	$user = create('App\User');
-    	$this->actingAs ($user);
+    	$this->signIn ();
     	$thread = create('App\Thread');
     	$reply = make('App\Reply'); //This make the reply only in memory, don't persistent
     	$this->post($thread->path . '/replies', $reply->toArray());
