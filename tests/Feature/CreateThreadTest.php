@@ -39,4 +39,13 @@ class CreateThreadTest extends TestCase
              ->assertRedirect('/login');
 
     }
+
+    public function test_a_thread_require_a_title()
+    {
+        $this->withExceptionHandling()
+             ->signIn();
+        $thread = make ('App\Thread', ['title' => null]);
+        $this->post('/threads', $thread->toArray())
+             ->assertSessionHasErrors('title');
+    }
 }
