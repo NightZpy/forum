@@ -18,12 +18,17 @@ class Thread extends Model
 		return $this->hasMany(Reply::class);
 	}
 
+	public function channel()
+	{
+		return $this->belongsTo(Channel::class);
+	}
+
 	public function addReply($reply)
 	{
 		$this->replies()->create($reply);
 	}
 
     public function getPathAttribute() {
-    	return route('threads.show', $this->id);
+    	return str_replace('?', '/', route('threads.show', [$this->channel->slug, $this->id], false));
     }
 }

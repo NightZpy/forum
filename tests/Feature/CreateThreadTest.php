@@ -11,19 +11,18 @@ class CreateThreadTest extends TestCase
     
     public function setUp()
     {
-        parent::setUp();
-        $this->thread = make('App\Thread');
+        parent::setUp();        
     }  
     
     public function test_a_authenticated_user_may_create_a_thread()
 	{
     	$this->signIn ();
-
-    	$this->post('/threads', $this->thread->toArray());
-
-    	$this->get($this->thread->path)
-    		 ->assertSee($this->thread->title)
-    		 ->assertSee($this->thread->body);
+        $thread = make('App\Thread');
+    	$this->post('/threads', $thread->toArray());
+        $thread = \App\Thread::orderBy('created_at', 'desc')->first();
+    	$this->get($thread->path)
+    		 ->assertSee($thread->title)
+    		 ->assertSee($thread->body);
 	}  
 
 	public function test_a_guests_cannot_create_a_thread()

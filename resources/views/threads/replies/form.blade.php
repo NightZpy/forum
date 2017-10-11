@@ -1,4 +1,4 @@
-<form action="{{ route('threads.replies.store', $thread->id) }}" method="POST">
+<form action="{{ route('threads.replies.store', [$thread->channel->id, $thread->id]) }}" method="POST">
     {{ csrf_field() }}
     <div class="form-group">
         <textarea
