@@ -13,7 +13,6 @@ class CreateThreadTest extends TestCase
     {
         parent::setUp();
         $this->thread = make('App\Thread');
-        $this->disableExceptionHandling();
     }  
     
     public function test_a_authenticated_user_may_create_a_thread()
@@ -29,19 +28,14 @@ class CreateThreadTest extends TestCase
 
 	public function test_a_guests_cannot_create_a_thread()
 	{        
-        $this->expectException('Illuminate\Auth\AuthenticationException');
+        //$this->expectException('Illuminate\Auth\AuthenticationException');
         $this->withExceptionHandling();
-        $this->post('/threads', []);
-//             
-
-    }
-
-    public function test_a_guests_cannot_see_create_thread_page()
-    {        
-        //$this->disableExceptionHandling();
-		$this->expectException('Illuminate\Auth\AuthenticationException');
-        $this->withExceptionHandling()
-             ->get('/threads/create')
+             
+        $this->get('/threads/create')
              ->assertRedirect('/login');
+
+        $this->post('/threads', [])
+             ->assertRedirect('/login');
+
     }
 }
