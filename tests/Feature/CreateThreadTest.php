@@ -20,6 +20,8 @@ class CreateThreadTest extends TestCase
         $thread = make('App\Thread');
     	$this->post('/threads', $thread->toArray());
         $thread = \App\Thread::orderBy('created_at', 'desc')->first();
+        //or can get the path with the header redirected location from post call
+        //$response->headers->get('Location') $response is return for post call
     	$this->get($thread->path)
     		 ->assertSee($thread->title)
     		 ->assertSee($thread->body);
