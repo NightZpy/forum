@@ -26,4 +26,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getPathAttribute() {
+        return route('users.show', $this->id);
+    }    
 }
