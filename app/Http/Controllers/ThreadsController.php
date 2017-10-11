@@ -31,7 +31,7 @@ class ThreadsController extends Controller
      */
     public function create()
     {
-        //
+        return view('threads.create');
     }
 
     /**
@@ -42,6 +42,7 @@ class ThreadsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->request->add(['user_id' => auth()->id()]);
         $thread = Thread::create($request->toArray());        
         return redirect($thread->path);
         //return redirect(route('threads.index'));

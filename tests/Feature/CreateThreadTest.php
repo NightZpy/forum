@@ -17,7 +17,7 @@ class CreateThreadTest extends TestCase
     
     public function test_a_authenticated_user_may_create_a_thread()
 	{
-    	$this->signIn ($user);
+    	$this->signIn ();
 
     	$this->post('/threads', $this->thread->toArray());
 
