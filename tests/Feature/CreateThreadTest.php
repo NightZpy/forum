@@ -9,11 +9,6 @@ class CreateThreadTest extends TestCase
 {
 	use DatabaseMigrations;
     
-    public function setUp()
-    {
-        parent::setUp();        
-    }  
-    
     public function test_a_authenticated_user_may_create_a_thread()
 	{
     	$this->signIn ();
@@ -38,5 +33,30 @@ class CreateThreadTest extends TestCase
         $this->post('/threads', [])
              ->assertRedirect('/login');
 
+    }
+
+    public function test_a_thread_validate_create_data()
+    {        
+        $params = ['title' => null, 'body' => null];
+        $this->publishThread($params)
+             ->assertSessionHasErrors(['title', 'body']);
+    }
+
+    public function test_a_thread_have_a_valid_channel()
+    {
+        factory('App\Channel', 1)->create();
+
+        $this->publishThread(['channel_id' => null])
+             ->assertSessionHasErrors('channel_id');
+
+        $this->publishThread(['channel_id' => 2])
+             ->assertSessionHasErrors('channel_id');
+    }
+
+    public function publishThread($params = [])
+    {
+        $this->withExceptionHandling()->signIn();
+        $thread = make ('App\Thread', $params);
+        return $this->post('/threads', $thread->toArray());
     }
 }

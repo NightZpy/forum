@@ -24,4 +24,15 @@ class ParticipateInForumTest extends TestCase
     	$this->get($thread->path)
     		 ->assertSee ($reply->body);
     }
+
+    public function test_a_reply_require_a_body()
+    {
+        $this->withExceptionHandling()->signIn();
+
+        $thread = create('App\Thread');
+        $reply = make('App\Reply', ['body' => null]); //This make the reply only in memory, don't persistent
+
+        $this->post($thread->path . '/replies', $reply->toArray())
+             ->assertSessionHasErrors('body');
+    }
 }
