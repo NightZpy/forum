@@ -27,7 +27,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function threads()
+    {
+        return $this->hasMany (Thread::class);
+    }
+
     public function getPathAttribute() {
-        return route('users.show', $this->id);
+        return route('users.show', $this->id, false);
+    }
+
+    public function getPathToThreadsAttribute()
+    {
+        return route('threads.index.by-user', $this->name, false);
     }    
 }

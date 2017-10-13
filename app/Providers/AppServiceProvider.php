@@ -13,15 +13,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*\View::composer('*', function ($view) {
+        \View::composer('*', function ($view) {
             $view->with('channels', \App\Channel::all())
                  ->with('filteredChannels', \App\Channel::with('threads')->has('threads')->get());
-        });*/
+        });
 
-        \View::share([
+        /*\View::share([
                 'channels'=> \App\Channel::all(),
                 'filteredChannels' => \App\Channel::with('threads')->has('threads')->get()     
-            ]);
+            ]);*/
     }
 
     /**
