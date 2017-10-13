@@ -40,7 +40,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Channels <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                @foreach (\App\Channel::with('threads')->has('threads')->get() as $channel)
+                                @foreach ($filteredChannels as $channel)
                                         <li><a href="{{ $channel->path }}">{{ $channel->slug }}</a></li>
                                 @endforeach
                             </ul>

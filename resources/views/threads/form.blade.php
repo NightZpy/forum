@@ -13,7 +13,7 @@
         <label for="channel_id">Channel</label>
         <select name="channel_id" id="channel_id" class="form-control">
             <option value="">Choose a channel</option>
-            @foreach (\App\Channel::with('threads')->has('threads')->get() as $channel)
+            @foreach ($channels as $channel)
                 <option 
                     value="{{ $channel->id }}"
                     {{ ($channel->id != old('channel_id')) ? '' : 'selected' }}
