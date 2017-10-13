@@ -23,7 +23,7 @@ class ThreadsController extends Controller
     {
     	if ($channel->exists)
     		$threads = $channel->threads;
-        elseif ($userName = request('by-user') && $userName == \Auth::user()->name)        	
+        elseif (request('by-user') && request('by-user') == \Auth::user()->name)        	
         	$threads = \Auth::user()->threads;
         else
         	$threads = Thread::orderBy('created_at', 'desc')->get();
