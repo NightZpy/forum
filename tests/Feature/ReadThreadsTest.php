@@ -44,4 +44,16 @@ class ReadThreadsTest extends TestCase
         $this->get($this->thread->path)
              ->assertSee($this->thread->owner->name);
     }
+
+    public function test_a_user_can_filter_threads_depending_of_channel_tag()
+    {
+        $channel = create('App\Channel');
+        $inChannel = create('App\Thread', ['channel_id' => $channel->id], 50);
+        $notChannel = create('App\Thread');
+        
+        $this->get($channel->path)
+             ->assertSee ($inChannel->first()->title)        
+             ->assertSee ($inChannel->last()->title)        
+             ->assertDontSee ($threads->title);        
+    }
 }
