@@ -19,10 +19,13 @@ class ThreadsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Channel $channel)    
     {
+    	if ($channel->exists)
+    		return view ('threads.show-by-channel', compact('channel'));        
         $threads = Thread::orderBy('created_at', 'desc')->get();
         return view ('threads.index', compact('threads'));
+        
     }
 
     /**

@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Channel extends Model
 {
+	public function getRouteKeyName()
+	{
+		return 'slug';
+	}
+
 	public function threads()
 	{
 		return $this->hasMany(Thread::class);
@@ -13,6 +18,6 @@ class Channel extends Model
 
 	public function getPathAttribute()
 	{
-		return str_replace('?', '/', route('threads.show.by-channel', $this->slug, false));		
+		return str_replace('?', '/', route('threads.index', $this->slug, false));		
 	}
 }
