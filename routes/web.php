@@ -23,7 +23,7 @@ Route::get('/threads', 'ThreadsController@index')->name('threads.index');
 Route::post('/threads', 'ThreadsController@store')->name('threads.store');
 Route::get('/threads/create', 'ThreadsController@create')->name('threads.create');
 Route::get('/threads/{channelId}/{thread}', 'ThreadsController@show')->name('threads.show');
-Route::get('/threads/{channelId}', 'ThreadsController@showByChannel')->name('threads.show.by-channel');
+Route::get('/threads/{channelSlug}', 'ThreadsController@showByChannel')->name('threads.show.by-channel');
 Route::post('/threads/{channelId}/{thread}/replies', 'RepliesController@store')->name('threads.replies.store');
 //Route::resource('threads', 'ThreadsController');
 

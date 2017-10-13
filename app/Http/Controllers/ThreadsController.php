@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Thread;
+use App\Channel;
 use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
@@ -10,7 +11,7 @@ class ThreadsController extends Controller
     public function __construct()
     {
         $this->middleware ('auth')
-             ->except('index', 'show');
+             ->except('index', 'show', 'showByChannel');
     }    
 
     /**
@@ -95,5 +96,11 @@ class ThreadsController extends Controller
     public function destroy(Thread $thread)
     {
         //
+    }
+
+    public function showByChannel($channelSlug)
+    {
+        $channel = Channel::whereSlug($channelSlug)->get()->first();
+        return view ('threads.show-by-channel', compact('channel'));
     }
 }

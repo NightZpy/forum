@@ -50,10 +50,9 @@ class ReadThreadsTest extends TestCase
         $channel = create('App\Channel');
         $inChannel = create('App\Thread', ['channel_id' => $channel->id], 50);
         $notChannel = create('App\Thread');
-        
         $this->get($channel->path)
              ->assertSee ($inChannel->first()->title)        
              ->assertSee ($inChannel->last()->title)        
-             ->assertDontSee ($threads->title);        
+             ->assertDontSee ($notChannel->title);        
     }
 }
