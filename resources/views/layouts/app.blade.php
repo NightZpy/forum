@@ -36,7 +36,16 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="/threads">All Threads</a></li>
+                        <li><a href="{{ route('threads.index') }}">All Threads</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Channels <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                @foreach ($filteredChannels as $channel)
+                                        <li><a href="{{ $channel->path }}">{{ $channel->slug }}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        <li><a href="{{ route('threads.create') }}">New thread</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
