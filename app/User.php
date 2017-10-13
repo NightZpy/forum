@@ -29,5 +29,10 @@ class User extends Authenticatable
 
     public function getPathAttribute() {
         return route('users.show', $this->id);
+    }
+
+    public function getPathToThreadsAttribute()
+    {
+        return route('threads.index.by-user', $this->name);
     }    
 }

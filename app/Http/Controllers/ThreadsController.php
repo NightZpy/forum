@@ -22,8 +22,12 @@ class ThreadsController extends Controller
     public function index(Channel $channel)    
     {
     	if ($channel->exists)
-    		return view ('threads.show-by-channel', compact('channel'));
-        $threads = Thread::orderBy('created_at', 'desc')->get();
+    		$threads = $channel->threads;
+        elseif ($userName = request('by-user') && $userName == \Auth::user()->name)        	
+        	$threads = \Auth::user()->threads;
+        else
+        	$threads = Thread::orderBy('created_at', 'desc')->get();
+
         return view ('threads.index', compact('threads'));
     }
 
