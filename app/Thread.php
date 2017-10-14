@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
@@ -30,5 +31,10 @@ class Thread extends Model
 
     public function getPathAttribute() {
     	return str_replace('?', '/', route('threads.show', [$this->channel->slug, $this->id], false));
+    }
+
+    public function scopeFilter($query, ThreadFilters $filters)
+    {
+        return $filters->apply($query);
     }
 }
