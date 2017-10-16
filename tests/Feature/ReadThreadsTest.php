@@ -76,7 +76,7 @@ class ReadThreadsTest extends TestCase
 		$fiveReplies = create('App\Reply', ['thread_id' => $threadWithFiveReplies->id], 5);
 		$tenReplies = create('App\Reply', ['thread_id' => $threadWithTenReplies->id], 10);
 
-		$response = $this->getJson('/threads?sort-by-popularity=1')->json();
+		$response = $this->getJson(route('threads.index.sort-by-popularity', [], false))->json();
 
 		$this->assertEquals([10, 5, 0], array_column($response, 'replies_count'));
 
