@@ -37,6 +37,7 @@ $factory->define(App\Thread::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Reply::class, function (Faker\Generator $faker) {
+
 	return [
 		'body'	=> $faker->paragraph,
 		'thread_id' => function () {

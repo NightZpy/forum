@@ -33,6 +33,11 @@ class Thread extends Model
     	return str_replace('?', '/', route('threads.show', [$this->channel->slug, $this->id], false));
     }
 
+	public function getRepliesQuantityAttribute()
+	{
+		return $this->replies()->count();
+    }
+
     public function scopeFilter($query, ThreadFilters $filters)
     {
         return $filters->apply($query);
