@@ -66,4 +66,19 @@ class ReadThreadsTest extends TestCase
              ->assertSee($threadWithUser->title);
              //->assertDontSee($threadWithoutUser->title);
     }
+
+	public function test_a_user_can_sort_threads_by_popularity()
+	{
+		$threadWithTenReplies = create('App\Thread');
+		$threadWithoutReplies = $this->thread;
+		$threadWithFiveReplies = create('App\Thread');
+
+		$fiveReplies = create('App\Reply', ['thread_id' => $threadWithFiveReplies->id], 5);
+		$tenReplies = create('App\Reply', ['thread_id' => $threadWithTenReplies->id], 10);
+
+		$response = $this->getJson('/threads?sort-by-popularity=1')->json();
+
+		$this->assertEquals([10, 5, 0], array_column($response, 'replies_count'));
+
+    }
 }
