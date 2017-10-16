@@ -27,17 +27,6 @@ abstract class TestCase extends BaseTestCase
     {
     	$this->oldExceptionHandler = $this->app->make(ExceptionHandler::class);
     	$this->app->instance(ExceptionHandler::class, new TestHandler);
-        /*app()->instance(Handler::class, new class extends Handler {
-            public function __construct() {}
-            public function report(Exception $e)
-            {
-                // no-op
-            }
-            public function render($request, Exception $e)
-            {
-                throw $e;
-            }
-        });*/
         return $this;
     }
 

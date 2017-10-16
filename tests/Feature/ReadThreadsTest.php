@@ -61,7 +61,7 @@ class ReadThreadsTest extends TestCase
     {
         $this->signIn();
         $threadWithUser = create('App\Thread', ['user_id' => auth()->id()]);
-        $threadWithoutUser = create('App\Thread');
+        $threadWithoutUser = create('App\Thread');        
         $this->get(\Auth::user()->pathToThreads)
              ->assertSee($threadWithUser->title);
              //->assertDontSee($threadWithoutUser->title);
