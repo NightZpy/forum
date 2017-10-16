@@ -41,6 +41,11 @@ class Thread extends Model
     	return str_replace('?', '/', route('threads.show', [$this->channel->slug, $this->id], false));
     }
 
+	public function getRepliesCountTxtAttribute()
+	{
+		return $this->replies_count . ' ' . str_plural('reply', $this->replies_count);
+    }
+
     public function scopeFilter($query, ThreadFilters $filters)
     {
         return $filters->apply($query);

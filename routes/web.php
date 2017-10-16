@@ -19,6 +19,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/threads?by-user={user}', 'ThreadsController@index')->name('threads.index.by-user');
+Route::get('/threads?sort-by-popularity=1', 'ThreadsController@index')->name('threads.index.sort-by-popularity');
 Route::get('/threads/create', 'ThreadsController@create')->name('threads.create');
 Route::get('/threads/{channel?}', 'ThreadsController@index')->name('threads.index');
 Route::post('/threads', 'ThreadsController@store')->name('threads.store');

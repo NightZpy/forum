@@ -35,7 +35,7 @@
                         <article>
                             <p>
                                 This thread was published {{ $thread->created_at->diffForHumans() }}, has
-                                {{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }} and was
+                                {{ $thread->repliesCountTxt }} and was
                                 created by
                                 <a href="#">{{ $thread->owner->name }}</a>.
                             </p>
