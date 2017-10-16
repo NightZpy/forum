@@ -21,16 +21,7 @@ class ThreadsController extends Controller
      */
     public function index(Channel $channel, ThreadFilters $filters)    
     {
-
-    	/*if ($channel->exists)
-    		$threads = $channel->threads;
-        elseif (request('by-user') && request('by-user') == \Auth::user()->name)        	
-        	$threads = \Auth::user()->threads;
-        else
-        	$threads = Thread::orderBy('created_at', 'desc')->get();*/
-    	
     	$threads = $this->getThreads($channel, $filters);
-    	//dd([\Auth::user()->toArray(), $threads->toArray()]);
         return view ('threads.index', compact('threads'));
     }
 
@@ -70,7 +61,8 @@ class ThreadsController extends Controller
      */
     public function show($channelId, Thread $thread)
     {
-        return view('threads.show', compact ('thread'));
+    	$replies = $thread->replies()->paginate(1);
+        return view('threads.show', compact ('thread', 'replies'));
     }
 
     /**

@@ -18,9 +18,10 @@
                     </div>
                 </div>
                 <h3 class="text-center">Replies</h3>
-                @foreach ($thread->replies as $reply)
+                @foreach ($replies as $reply)
                     @include('threads.replies.index')
                 @endforeach
+                {{ $replies->links() }}
 
                 @if (auth()->check())
                     @include('threads.replies.form')
@@ -29,15 +30,17 @@
                 @endif
             </div>
             <div class="col-md-4">
-                <div class="panel-body">
-                    <article>
-                        <p>
-                            This thread was published {{ $thread->created_at->diffForHumans() }}, have
-                            {{ $thread->repliesQuantity }} {{ str_plural('reply', $thread->repliesQuantity) }} and was
-                            created by
-                            <a href="#">{{ $thread->owner->name }}</a>.
-                        </p>
-                    </article>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <article>
+                            <p>
+                                This thread was published {{ $thread->created_at->diffForHumans() }}, has
+                                {{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }} and was
+                                created by
+                                <a href="#">{{ $thread->owner->name }}</a>.
+                            </p>
+                        </article>
+                    </div>
                 </div>
             </div>
         </div>
