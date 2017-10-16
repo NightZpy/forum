@@ -10,9 +10,11 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class LikesTest extends TestCase {
 	use DatabaseMigrations;
 
-	public function a_guests_cannot_like()
+	public function test_a_guests_cannot_like()
 	{
-		$this->get(route('replies.like', 1));
+		$this->withExceptionHandling();
+		$this->get(route('replies.like', 1))
+			 ->assertRedirect('/login');
 	}
 	
 	public function test_an_aunthenticated_user_like_a_reply()

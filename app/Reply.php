@@ -13,9 +13,14 @@ class Reply extends Model
     	return $this->belongsTo(User::class, 'user_id');
     }
 
+	public function likes()
+	{
+		return $this->morphMany(Like::class, 'liked');
+    }
+
 	public function like()
 	{
-
+		$this->likes()->create(['user_id' => auth()->id()]);
     }
 
 	public function getLikePathAttribute()
