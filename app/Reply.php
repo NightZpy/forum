@@ -12,4 +12,14 @@ class Reply extends Model
     {
     	return $this->belongsTo(User::class, 'user_id');
     }
+
+	public function like()
+	{
+
+    }
+
+	public function getLikePathAttribute()
+	{
+		return route('replies.like', $this->id);
+    }
 }
