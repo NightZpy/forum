@@ -20,7 +20,9 @@ class Reply extends Model
 
 	public function like()
 	{
-		$this->likes()->create(['user_id' => auth()->id()]);
+		$attributes = ['user_id' => auth()->id()];
+		if ( !$this->likes()->where($attributes)->exists() )
+			return $this->likes()->create($attributes);
     }
 
 	public function getLikePathAttribute()
