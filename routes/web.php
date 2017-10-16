@@ -28,4 +28,6 @@ Route::get('/threads/{channelId}/{thread}', 'ThreadsController@show')->name('thr
 Route::post('/threads/{channelId}/{thread}/replies', 'RepliesController@store')->name('threads.replies.store');
 //Route::resource('threads', 'ThreadsController');
 
+Route::get('replies/{reply}/like', 'RepliesController@like')->name('replies.like');
+
 

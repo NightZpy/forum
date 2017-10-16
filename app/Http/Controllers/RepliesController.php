@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Reply;
 use Illuminate\Http\Request;
 use App\Thread;
 
@@ -10,7 +11,7 @@ class RepliesController extends Controller
 	public function __construct()
 	{
 		$this->middleware ('auth')
-			 ->only('store');
+			 ->only('store', 'like');
 	}
 
     public function store(Request $request, $channelId, Thread $thread)
@@ -24,5 +25,10 @@ class RepliesController extends Controller
 		]);
 
 		return back();
+    }
+
+	public function like(Reply $reply)
+	{
+		$reply->like();
     }
 }
